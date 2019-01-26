@@ -1,0 +1,91 @@
+#calContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 700px;
+	border: solid 5px #41403E;
+    border-top-left-radius: 270px 100px;
+    border-top-right-radius: 270px 100px;
+    border-bottom-right-radius: 35px;
+    border-bottom-left-radius: 35px;
+	background-color:#e1e3e8;
+	margin-top: 20px;
+	margin-left: 30px;
+	padding-bottom: 20px;
+}
+
+/*****************************
+ *  Styling for calculator   *
+/****************************/
+#calResultFrame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 600px;
+    max-width: 400px;
+    width: 93%;
+    padding: 20px;
+    border: solid 5px #41403E;
+    border-top-left-radius: 270px 100px;
+    border-top-right-radius: 270px 100px;
+    border-bottom-right-radius: 35px;
+    border-bottom-left-radius: 35px;
+    background: #bc8af2;
+}
+
+#calResultFrameInner {
+    background: #fefefe;
+    border: solid 5px #41403E;
+    width: 100%;
+    height: 150px;
+    border-top-left-radius: 270px 100px;
+    border-top-right-radius: 270px 100px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+#calResultInput {
+    width: 85%;
+    min-height: 80px;
+    text-align: right;
+    color: #41403E;
+    overflow: hidden;
+    font-size: 30px;
+}
+
+.calBtn {
+    background:#fffcc4;
+    color: #41403E;
+    font-size: 2rem;
+    width: 75px;
+    height: 75px;
+    outline: none;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    border: solid 7px #41403E;
+    flex: 1;
+    box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+    transition: all .5s ease;
+	margin: 2px;
+	cursor: pointer;
+}
+.calBtn:hover {
+    box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
+}
+
+.on {
+	background:#f4e842;
+}
+/*****************************
+ *       Flex Styles         *
+/****************************/
+.row {
+    margin-right: 0;
+    margin-left: 0;
+	justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}

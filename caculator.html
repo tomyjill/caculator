@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="eng">
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>"Javascript"</title>
+	<link rel="stylesheet" type="text/css" href="caculator.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div id="calContainer">
+		<div id="calResultFrame">
+			<div id="calResultFrameInner">
+				<div id="calResultInput">0</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<button class="calBtn" data-action="clear">c</button>
+			<button class="calBtn operator" data-action="divide">/</button>
+			<button class="calBtn operator" data-action="multiply">x</button>
+			<button class="calBtn" data-action="backSpace"><</button>
+		</div>
+
+		<div class="row">
+			<button class="calBtn">7</button>
+			<button class="calBtn">8</button>
+			<button class="calBtn">9</button>
+			<button class="calBtn operator" data-action="subtract">-</button>
+		</div>
+		
+		<div class="row">
+			<button class="calBtn">4</button>
+			<button class="calBtn">5</button>
+			<button class="calBtn">6</button>
+			<button class="calBtn operator" data-action="add">+</button>
+		</div>
+		
+		<div class="row">
+			<button class="calBtn">1</button>
+			<button class="calBtn">2</button>
+			<button class="calBtn">3</button>
+			<button class="calBtn operator" data-action="total">=</button>
+		</div>
+		
+		<div class="row">
+			<button class="calBtn percentage">%</button>
+			<button class="calBtn">0</button>
+			<button class="calBtn" data-action="decimal">.</button>
+			<button class="calBtn on" id="onOff" data-action="on">ON</button>
+		</div>
+		
+	</div>
+	
+<script src="https://code.jquery.com/jquery-3.3.1.js"integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script src="caculator.js"></script>
+</body>
+</html>
