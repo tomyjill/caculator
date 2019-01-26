@@ -11,7 +11,12 @@ $(document).ready(function() {
 	$('#calResultInput').hide();
     $('.on').on('click', function(show) {
 		$('#calResultInput').show();
-		onOff();
+		$('.on').text('OFF');		
+	});
+	
+	$('.off').on('click', function() {
+		$('#calResultInput').empty(numbers);
+		$('.off').text('ON');
 	});
 	
 	$('.calBtn').on('click', function(e) {	
@@ -26,15 +31,7 @@ $(document).ready(function() {
 		}
     });
 });
-
-function onOff(){
-  dataAction = document.getElementById('onOff').action;
-  if(dataAction == "off"){
-    document.getElementById("onOff").action='ON';
-  }else{
-    document.getElementById("onOff").action="OFF";
-  }
-}
+			
 
 function handleNumber(num) {
 	console.log('hey i am a number');
