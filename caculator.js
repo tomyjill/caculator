@@ -23,7 +23,6 @@ $(document).ready(function() {
 			$('#onOff').html('ON');
 			yes = true;
 		}
-			
 	});
 	
 	
@@ -73,7 +72,7 @@ function handleAction(action) {
 			displayButton(parseInt(numbers.join('')));
 			break;
 		case '.':
-			displayButton(decimalNum);
+			displayButton(ConvertDecimalNum());
 			break;
 		case 'c':	
 			emptyDisplay();
@@ -122,5 +121,9 @@ function updateVariables() {
 
 function emptyDisplay(){ 
 	$('#calResultInput').empty();
+}
+
+function ConvertDecimalNum(){
+	parseFloat(decimalNum);
 }
 	

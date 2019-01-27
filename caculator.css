@@ -17,9 +17,6 @@
 	padding-bottom: 20px;
 }
 
-/*****************************
- *  Styling for calculator   *
-/****************************/
 #calResultFrame {
     display: flex;
     flex-direction: column;
@@ -80,9 +77,7 @@
 .on {
 	background:#f4e842;
 }
-/*****************************
- *       Flex Styles         *
-/****************************/
+
 .row {
     margin-right: 0;
     margin-left: 0;
