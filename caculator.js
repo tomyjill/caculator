@@ -4,20 +4,28 @@ let numbers = [];
 let operator = '';
 let action = '';
 let total = '';
+let decimalNum = num1 + '.' + num2;
 
-const operators = ['x','/','%','-','+'];
+const operators = ['x','/','%','-','+','='];
 
 $(document).ready(function() {
 	$('#calResultInput').hide();
-    $('.on').on('click', function(show) {
-		$('#calResultInput').show();
-		$('.on').text('OFF');		
+	
+	var yes = true;
+	$('.on').on('click', function(show) {
+		
+		if(yes){				
+			$('#calResultInput').show();
+			$('#onOff').html('OFF');
+			yes = false;
+		} else {
+			$('#calResultInput').hide();
+			$('#onOff').html('ON');
+			yes = true;
+		}
+			
 	});
 	
-	$('.off').on('click', function() {
-		$('#calResultInput').empty(numbers);
-		$('.off').text('ON');
-	});
 	
 	$('.calBtn').on('click', function(e) {	
 		
@@ -62,12 +70,12 @@ function handleAction(action) {
 		
 		case '&lt;':
 		    numbers.pop();
-			displayButton(numbers.join(''));
+			displayButton(parseInt(numbers.join('')));
 			break;
 		case '.':
-			return (num1 + '.' + num2);
+			displayButton(decimalNum);
 			break;
-		case 'c':
+		case 'c':	
 			emptyDisplay();
 			break;
 	}
@@ -94,8 +102,10 @@ function handleTotal() {
             displayButton(total);
             break;
 		case '%':
-			total = +num1 * ''/100;
+			total = (num1 * ''/100).toFixed(3);
 			displayButton(total);
+			break;
+		
     console.log('hey i am a operator');	
 	}
     updateVariables();
@@ -110,7 +120,7 @@ function updateVariables() {
     num2 = '';
 }
 
-function emptyDisplay(numbers){ 
-	$('#calResultInput').empty(numbers);
+function emptyDisplay(){ 
+	$('#calResultInput').empty();
 }
 	
