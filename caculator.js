@@ -63,7 +63,8 @@ function handleAction(action) {
 			displayButton(parseInt(input.join('')));
 			break;
 		case '.':
-			
+			input.push('.')
+			displayButton(input.join(''));
 			break;
 		case 'c':	
 			emptyDisplay();
@@ -78,42 +79,43 @@ function handleTotal() {
 	let formattedInput = [];
 
 	input.forEach((element, index) => {
-		if (isNaN(element)) {
+		if (isNaN(element) && element !== '.') {
 			formattedInput.push(element)
 			return;
 		}
-		if (!isNaN(input[index -1])) {
+		if (!isNaN(input[index -1]) || 
+			element === '.' ||
+			input[index -1] === '.'
+		 ) {
 			let lastNumber = formattedInput.pop();
 			formattedInput.push(lastNumber + element);
-		// if (!isNaN(input[index -1]) && index + 1 == '.') {
-		// 	formattedInput.push(element)
-		// }
 		} else {
 			formattedInput.push(element);
 		}
 	});
+
 	console.log(formattedInput);
 
 	let result = 0;
 	let indexToSkip = null;
 	formattedInput.forEach(function (element, index){
 		if (element == 'x') {
-			result = result * parseInt(formattedInput[index + 1]);
+			result = result * parseNumber(formattedInput[index + 1]);
 			indexToSkip = index + 1;
 			return;
 		}
 		if (element == '+') {
-			result = result + parseInt(formattedInput[index + 1]);
+			result = result + parseNumber(formattedInput[index + 1]);
 			indexToSkip = index + 1;
 			return;
 		}
 		if (element == '-') {
-			result = result - parseInt(formattedInput[index + 1]);
+			result = result - parseNumber(formattedInput[index + 1]);
 			indexToSkip = index + 1;
 			return;
 		}
 		if (element == '/') {
-			result = result / parseInt(formattedInput[index + 1]);
+			result = result / parseNumber(formattedInput[index + 1]);
 			indexToSkip = index + 1;
 			return;
 		}
@@ -125,9 +127,16 @@ function handleTotal() {
 			indexToSkip = null;
 			return;
 		} 	
-		result = parseInt(element);	
+		result = parseNumber(element);	
 	});
 	console.log(result);
+}
+
+function parseNumber(stringNumber){
+	if (stringNumber.includes('.')){
+		return parseFloat(stringNumber);
+	}
+	return parseInt(stringNumber);
 }
 
 function displayButton(value) {
