@@ -74,47 +74,26 @@ function handleAction(action) {
 
 function handleTotal() {
 	console.log(input);
-
-	let formattedInput = [];
-
-	input.forEach((element, index) => {
-		if (isNaN(element)) {
-			formattedInput.push(element)
-			return;
-		}
-		if (!isNaN(input[index -1])) {
-			let lastNumber = formattedInput.pop();
-			formattedInput.push(lastNumber + element);
-		// if (!isNaN(input[index -1]) && index + 1 == '.') {
-		// 	formattedInput.push(element)
-		// }
-		} else {
-			formattedInput.push(element);
-		}
-	});
-
-	console.log(formattedInput);
-
 	let result = 0;
 	let indexToSkip = null;
-	formattedInput.forEach(function (element, index){
+	input.forEach(function (element, index){
 		if (element == 'x') {
-			result = result * parseInt(formattedInput[index + 1]);
+			result = result * parseInt(input[index + 1]);
 			indexToSkip = index + 1;
 			return;
 		}
 		if (element == '+') {
-			result = result + parseInt(formattedInput[index + 1]);
+			result = result + parseInt(input[index + 1]);
 			indexToSkip = index + 1;
 			return;
 		}
 		if (element == '-') {
-			result = result - parseInt(formattedInput[index + 1]);
+			result = result - parseInt(input[index + 1]);
 			indexToSkip = index + 1;
 			return;
 		}
 		if (element == '/') {
-			result = result / parseInt(formattedInput[index + 1]);
+			result = result / parseInt(input[index + 1]);
 			indexToSkip = index + 1;
 			return;
 		}
@@ -136,7 +115,14 @@ function displayButton(value) {
     $('#calResultInput').text(value);
 }
 
+function updateVariables() {
+    num1 = total;
+    num2 = '';
+}
+
 function emptyDisplay(){ 
 	input = [];
 	$('#calResultInput').empty();
 }
+
+	
