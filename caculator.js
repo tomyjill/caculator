@@ -1,12 +1,9 @@
-let num1 = '';
-let num2 = '';
-let numbers = [];
+let input = [];
 let operator = '';
 let action = '';
 let total = '';
-let decimalNum = num1 + '.' + num2;
 
-const operators = ['x','/','%','-','+','='];
+const operators = ['x','/','%','-','+'];
 
 $(document).ready(function() {
 	$('#calResultInput').hide();
@@ -19,6 +16,7 @@ $(document).ready(function() {
 			$('#onOff').html('OFF');
 			yes = false;
 		} else {
+			$('#calResultInput').empty();
 			$('#calResultInput').hide();
 			$('#onOff').html('ON');
 			yes = true;
@@ -42,34 +40,27 @@ $(document).ready(function() {
 
 function handleNumber(num) {
 	console.log('hey i am a number');
-    if (num1 === '') {
-        num1 = num;
-    } else {
-        num2 = num;
-    }
-	numbers.push(num)
-    displayButton(numbers.join(''));
+	input.push(num)
+    displayButton(input.join(''));
 }
 
 function handleOperator(oper) {
 		console.log('hey i am a operator');
 
-    if (operator === '') {
-        operator = oper;
-    } else {
-        handleTotal();
-        operator = oper;
-    }
+	input.push(oper)
+    displayButton(input.join(''));
 }
 
 function handleAction(action) {
 			console.log('hey i am a action');
 
 	switch (action) {
-		
+		case '=':
+			handleTotal();
+			break;
 		case '&lt;':
-		    numbers.pop();
-			displayButton(parseInt(numbers.join('')));
+		    input.pop();
+			displayButton(parseInt(input.join('')));
 			break;
 		case '.':
 			displayButton(ConvertDecimalNum());
@@ -82,48 +73,70 @@ function handleAction(action) {
 	
 
 function handleTotal() {
-    switch (operator) {
-		
-        case '+':
-            total = +num1 + +num2;
-            displayButton(total);
-            break;
-        case '-':
-            total = +num1 - +num2;
-            displayButton(total);
-            break;
-        case '/':
-            total = +num1 / +num2;
-            displayButton(total);
-            break;
-        case 'x':
-            total = +num1 * +num2;
-            displayButton(total);
-            break;
-		case '%':
-			total = (num1 * ''/100).toFixed(3);
-			displayButton(total);
-			break;
-		
-    console.log('hey i am a operator');	
-	}
-    updateVariables();
+	console.log(input);
+
+	let formattedInput = [];
+
+	input.forEach((element, index) => {
+		if (isNaN(element)) {
+			formattedInput.push(element)
+			return;
+		}
+		if (!isNaN(input[index -1])) {
+			let lastNumber = formattedInput.pop();
+			formattedInput.push(lastNumber + element);
+		// if (!isNaN(input[index -1]) && index + 1 == '.') {
+		// 	formattedInput.push(element)
+		// }
+		} else {
+			formattedInput.push(element);
+		}
+	});
+
+	console.log(formattedInput);
+
+	let result = 0;
+	let indexToSkip = null;
+	formattedInput.forEach(function (element, index){
+		if (element == 'x') {
+			result = result * parseInt(formattedInput[index + 1]);
+			indexToSkip = index + 1;
+			return;
+		}
+		if (element == '+') {
+			result = result + parseInt(formattedInput[index + 1]);
+			indexToSkip = index + 1;
+			return;
+		}
+		if (element == '-') {
+			result = result - parseInt(formattedInput[index + 1]);
+			indexToSkip = index + 1;
+			return;
+		}
+		if (element == '/') {
+			result = result / parseInt(formattedInput[index + 1]);
+			indexToSkip = index + 1;
+			return;
+		}
+		if (element == '%') {
+			result = result / 100;
+			return;
+		}
+		if (indexToSkip == index) {
+			indexToSkip = null;
+			return;
+		} 	
+		result = parseInt(element);
+	});
+	
+	console.log(result);
 }
 
 function displayButton(value) {
     $('#calResultInput').text(value);
 }
 
-function updateVariables() {
-    num1 = total;
-    num2 = '';
-}
-
 function emptyDisplay(){ 
+	input = [];
 	$('#calResultInput').empty();
 }
-
-function ConvertDecimalNum(){
-	parseFloat(decimalNum);
-}
-	
