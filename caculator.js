@@ -63,7 +63,7 @@ function handleAction(action) {
 			displayButton(parseInt(input.join('')));
 			break;
 		case '.':
-			displayButton(ConvertDecimalNum());
+			
 			break;
 		case 'c':	
 			emptyDisplay();
@@ -73,27 +73,47 @@ function handleAction(action) {
 	
 
 function handleTotal() {
-	console.log(input);
+	//console.log(input);
+
+	let formattedInput = [];
+
+	input.forEach((element, index) => {
+		if (isNaN(element)) {
+			formattedInput.push(element)
+			return;
+		}
+		if (!isNaN(input[index -1])) {
+			let lastNumber = formattedInput.pop();
+			formattedInput.push(lastNumber + element);
+		// if (!isNaN(input[index -1]) && index + 1 == '.') {
+		// 	formattedInput.push(element)
+		// }
+		} else {
+			formattedInput.push(element);
+		}
+	});
+	console.log(formattedInput);
+
 	let result = 0;
 	let indexToSkip = null;
-	input.forEach(function (element, index){
+	formattedInput.forEach(function (element, index){
 		if (element == 'x') {
-			result = result * parseInt(input[index + 1]);
+			result = result * parseInt(formattedInput[index + 1]);
 			indexToSkip = index + 1;
 			return;
 		}
 		if (element == '+') {
-			result = result + parseInt(input[index + 1]);
+			result = result + parseInt(formattedInput[index + 1]);
 			indexToSkip = index + 1;
 			return;
 		}
 		if (element == '-') {
-			result = result - parseInt(input[index + 1]);
+			result = result - parseInt(formattedInput[index + 1]);
 			indexToSkip = index + 1;
 			return;
 		}
 		if (element == '/') {
-			result = result / parseInt(input[index + 1]);
+			result = result / parseInt(formattedInput[index + 1]);
 			indexToSkip = index + 1;
 			return;
 		}
@@ -105,20 +125,14 @@ function handleTotal() {
 			indexToSkip = null;
 			return;
 		} 	
-		result = parseInt(element);
+		result = parseInt(element);	
 	});
-	
 	console.log(result);
 }
 
 function displayButton(value) {
     $('#calResultInput').text(value);
-}
-
-function updateVariables() {
-    num1 = total;
-    num2 = '';
-}
+}	
 
 function emptyDisplay(){ 
 	input = [];
