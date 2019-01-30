@@ -2,6 +2,7 @@ let input = [];
 let operator = '';
 let action = '';
 let total = '';
+let result = '';
 
 const operators = ['x','/','%','-','+'];
 
@@ -72,30 +73,31 @@ function handleAction(action) {
 	}
 }
 	
-
 function handleTotal() {
-	//console.log(input);
+	let formattedInput = formatInput();
+	caculateTotal(formattedInput);
+}
 
-	let formattedInput = [];
-
-	input.forEach((element, index) => {
-		if (isNaN(element) && element !== '.') {
-			formattedInput.push(element)
-			return;
+ function formatInput(){
+	return input.reduce((formattedInput, currentValue, index) => {
+		if (isNaN(currentValue) && currentValue !== '.') {
+			formattedInput.push(currentValue)
+			return formattedInput;
 		}
-		if (!isNaN(input[index -1]) || 
-			element === '.' ||
+		if (!isNaN(input[index - 1]) || 
+			currentValue === '.' ||
 			input[index -1] === '.'
 		 ) {
 			let lastNumber = formattedInput.pop();
-			formattedInput.push(lastNumber + element);
+			formattedInput.push(lastNumber + currentValue);
 		} else {
-			formattedInput.push(element);
+			formattedInput.push(currentValue);
 		}
-	});
+		return formattedInput;
+	}, []);	
+}
 
-	console.log(formattedInput);
-
+function caculateTotal(formattedInput){	   
 	let result = 0;
 	let indexToSkip = null;
 	formattedInput.forEach(function (element, index){
@@ -127,8 +129,10 @@ function handleTotal() {
 			indexToSkip = null;
 			return;
 		} 	
-		result = parseNumber(element);	
+		result = parseNumber(element);
 	});
+	emptyDisplay();
+	displayButton(result);
 	console.log(result);
 }
 
